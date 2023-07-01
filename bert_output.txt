@@ -1,8 +1,8 @@
-[Question:]  How does Ontosense leverage websites?
+[Question:]  I am a content creator. How can I create semantic annotations for Ontosense?
 [Answers:]
-7.65: loosely - coupled semantic referencing using common website urls as semantic reference targets
-4.12: ontosense semantic references target commonly known, trusted urls
-4.78: relating the content to concepts represented using widely known, common website urls
-10.30: inside your own content annotation tool
+9.55: referencing vocabularies / taxonomies / ontologies
+10.25: by making one or more references to previously known concepts
+9.70: attaching ontosense tags to content parts
+5.77: leverage the ontosense search experience inside your own content annotation tool that you can provide to content creators! enable users to specify their context to find the right ontosense tags! implement semantic indexing based on ontosense tags
 
-[Best answer:]  ('inside your own content annotation tool', 10.30168342590332)
+[Best answer:]  ('by making one or more references to previously known concepts', 10.25155782699585)

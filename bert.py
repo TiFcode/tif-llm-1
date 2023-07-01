@@ -125,7 +125,7 @@ if __name__ == "__main__":
     # print("\n\n")
 
     #question = "Who won the world series in 2020?"
-    question = "How does Ontosense leverage websites?"
+    question = "I am a content creator. How can I create semantic annotations for Ontosense?"
     print("[Question:] ", question)
 
     #context = "The 2020 World Series was won by the Los Angeles Dodgers."
