@@ -31,10 +31,13 @@ def get_bert_answer(question, context):
     # print("[Answer:]", answer)
     # print("[Score:]", score)
 
+    print(f"\n{score:.2f}: {answer}")
+
     return answer, score
 
 
 def chunk_text(text, max_length):
+    print("[START] Creating chunks")
     tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
     words = text.split()
     chunks = []
@@ -53,6 +56,9 @@ def chunk_text(text, max_length):
 
     if current_chunk: # Append any remaining words as a chunk
         chunks.append(" ".join(current_chunk))
+
+    print(f"Splitted the context.txt into {chunks.count} chunks.")
+    print("[END] Creating chunks")
 
     return chunks
 
