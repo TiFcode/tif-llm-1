@@ -52,13 +52,17 @@ if __name__ == "__main__":
     print("Last hidden state shape:", last_hidden_state.shape)
     print("Pooler output shape:", pooler_output.shape)
 
-    sentence1 = "This is a sample sentence for BERT."
-    sentence2 = "BERT is used in this sample sentence."
-    sentence3 = "I love to play football."
+    sentence1 = "Today the weather will be fine."
+    sentence2 = "Today the weather will be nice."
+    sentence3 = "I am hungry."
+
     print("\n\n")
     print("Sentence1 == " + sentence1)
     print("Sentence2 == " + sentence2)
     print("Sentence3 == " + sentence3)
+    print("\n\n")
 
     print("Similarity between sentence 1 and 2:", get_sentence_similarity(sentence1, sentence2))
+    print("\n\n")
     print("Similarity between sentence 1 and 3:", get_sentence_similarity(sentence1, sentence3))
+    print("\n\n")
