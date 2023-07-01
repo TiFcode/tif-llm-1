@@ -1,0 +1,10 @@
+
+ontosense
+a semantic technology that makes it easy to add semantic meaning to search queries and content
+
+Ontosense introduces loosely-coupled semantic referencing using common website URLs as semantic reference targets.  It is proposed as a replacement of tightly-coupled semantic referencing of controlled vocabularies/definitions repositories.
+
+Figure 1. The ontosense query UI allows searching based on attributes (ex: "NCQ" above) that are not defined/inexistent in the target search database. These attributes can be either selected from URL suggestions or typed manually, and finally joined into the ontosense search structure by an internal or 3rd party ontosense semantic service provider.
+
+:: Ontosense provides benefits to the content consumers by increasing the quality of semantic interpretation of content through collaboration between the content creators and search engines (private/internal and public search engines).
+

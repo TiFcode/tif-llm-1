@@ -106,8 +106,13 @@ if __name__ == "__main__":
     print("\n\n")
 
 
-    question = "Who won the world series in 2020?"
-    context = "The 2020 World Series was won by the Los Angeles Dodgers."
+    #question = "Who won the world series in 2020?"
+    question = "How does Ontosense leverage websites?"
+
+    #context = "The 2020 World Series was won by the Los Angeles Dodgers."
+    # Read the context from a text file
+    with open('context.txt', 'r') as file:
+        context = file.read().replace('\n', ' ')
 
     answer = get_bert_answer(question, context)
 
