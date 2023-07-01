@@ -4,4 +4,4 @@ services:
     build: .
     volumes:
       - .:/app
-    command: python word2vec.py
+    command: /bin/bash -c "python word2vec.py > /app/word2vec_output.txt 2>&1 && python bert.py > /app/bert_output.txt 2>&1"
