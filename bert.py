@@ -1,10 +1,48 @@
 from scipy.spatial.distance import cosine
-from transformers import BertModel, BertTokenizer
+from transformers import BertModel, BertTokenizer, BertForQuestionAnswering
 import torch
+
+
+
+
+def get_bert_answer(question, context):
+
+    print("\n\n")
+    print("get_bert_answer() received this Question and this Context as input:")
+    print("Question: [" + question + "]")
+    print("Context: [" + context + "]")
+    print("\n\n")
+
+
+    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+    model = BertForQuestionAnswering.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+
+
+    # Encode the question and context to get input IDs and attention mask
+    inputs = tokenizer(question, context, return_tensors='pt')
+    input_ids = inputs['input_ids']
+    attention_mask = inputs['attention_mask']
+
+    # Get the model's predictions
+    outputs = model(input_ids, attention_mask=attention_mask)
+
+    # The model returns the predicted start and end indices of the answer
+    start_index = torch.argmax(outputs.start_logits)
+    end_index = torch.argmax(outputs.end_logits)
+
+    # Use the tokenizer to convert the indices to tokens
+    tokens = tokenizer.convert_ids_to_tokens(input_ids[0][start_index:end_index+1])
+
+    # Convert tokens to string
+    answer = tokenizer.convert_tokens_to_string(tokens)
+
+    return answer
+
 
 def get_bert_embeddings(sentence):
 
     print("get_bert_embeddings() received sentence as input: [" + sentence + "]")
+
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     model = BertModel.from_pretrained('bert-base-uncased')
 
@@ -66,3 +104,11 @@ if __name__ == "__main__":
     print("\n\n")
     print("Similarity between sentence 1 and 3:", get_sentence_similarity(sentence1, sentence3))
     print("\n\n")
+
+
+    question = "Who won the world series in 2020?"
+    context = "The 2020 World Series was won by the Los Angeles Dodgers."
+
+    answer = get_bert_answer(question, context)
+
+    print("Answer:", answer)
