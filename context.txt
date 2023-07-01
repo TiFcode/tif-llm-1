@@ -1,4 +1,6 @@
 
+ontosense.com	
+HomeOntosense WhitepaperCurriculum Vitae & Contact	
 ontosense
 a semantic technology that makes it easy to add semantic meaning to search queries and content
 
@@ -7,4 +9,141 @@ Ontosense introduces loosely-coupled semantic referencing using common website U
 Figure 1. The ontosense query UI allows searching based on attributes (ex: "NCQ" above) that are not defined/inexistent in the target search database. These attributes can be either selected from URL suggestions or typed manually, and finally joined into the ontosense search structure by an internal or 3rd party ontosense semantic service provider.
 
 :: Ontosense provides benefits to the content consumers by increasing the quality of semantic interpretation of content through collaboration between the content creators and search engines (private/internal and public search engines).
+
+:: All content creators are willing to make their content more accessible and correctly interpreted by search engines. Currently, search engines try to understand all the available content all by themselves. How can the content creators help increase the quality of the semantic interpretation of the content and queries? Until now, the only way for a content creator to annotate his content in order to suggest a semantic interpretation was by referencing vocabularies / taxonomies / ontologies. These semantic targets are hard to choose by any individual - finding and pointing to specific RDF repositories and resources is not as ubiqtuous as pointing a common website page URL. Furthermore, vocabularies and RDF repositories can never be recognized as "single point of reference" by search engines.
+
+:: The solution proposed by ontosense is to allow content creators to easily choose as semantic reference target one or multiple common website URLs as semantic targets to indicate the semantic interpretation of a portion of content (word, paragraph, page, database column, database table, selected image area etc.). Thus ontosense proposes loosely-coupled semantic referencing using common website URLs as semantic reference targets, as opposed to tightly-coupled semantic referencing of controlled vocabularies.
+
+:: Everyone benefits from using ontosense:
+
+classic roles:
+
+content consumer - uses the Ontosense Query UI
+
+content provider - enables ontosense and exposes the Ontosense Query UI
+
+content creator
+
+new roles introduced by ontosense
+
+semantic service provider
+
+Quick overview of the ontosense query UI
+The meaning of any content can be explained directly by the content creator by making one or more references to previously known concepts.
+
+This is the basis for the ontosense annotation system, that is designed to overcome the limitations of referencing specific vocabularies defined by individuals, companies and other entities/organisations. Instead of limiting to referencing dictionaries and ontologies, ontosense semantic references target commonly known, trusted URLs (like Wikipedia URLs) to indicate the intended meaning of the content.
+
+The Ontosense Query UI, presented in Figure 1, can be used for two purposes:
+
+for annotating content with ontosense tags (URL tags), allowing the content annotator to choose the best URLs to be used as semantic references;
+
+for information retrieval - content search using clearly specified attributes, together with the intended meaning of each attribute.
+
+Hello CONTENT CREATORS!
+Use ontosense tags to directly indicate the meaning of your content, right from the content creation moment!
+
+In addition to/instead of simple words ( #table #furniture), use an already well known/well trusted URL like #https://en.wikipedia.org/wiki/Table_(furniture) 
+
+"#" followed by a word is called a tag.
+
+"#" followed by an URL (#URL) is called an ontosense tag 
+
+You can ontosense-tag numbers, words, small portions of text, paragraphs, whole messages and/or whole pages using ontosense content block markers { } followed by one or more relevant ontosense tags (#URL). Ontosense-tag your info with well known URLs, not (just) simple words/letter combinations. Include the most known and representative URLs, URLs that others would also use to point the respective meaning.
+
+Ontosense tagging (#URL) can also be applied to images, as you may ontosense-tag multiple areas of an image to indicate the intended meaning of each area. Actually, you may ontosense tag any portion of any kind of content (audio, video, image, text etc.)
+
+The Ontosense Whitepaper includes more details regarding and the proposed Semantic Links (#URLs or "ontosense tags") in addition to the omnipresent Navigational Link (the standard HTML link).
+
+Sample ontosense annotation of a text
+Below are some examples of using ontosense tags to indicate the meaning of a text by relating the content to concepts represented using widely known, common website URLs. Ontosense-enabled content editors and content browsers/viewers would never show the annotations visibly as below, the annotations are made clearly visible below just for the purpose of this explanation.  
+
+
+The normal text, without meaning indications: "The height of this table is 45cm making it ideal for keeping in front of your couch. It has a round shape with a diameter of 50cm."
+
+The same text with the intended meaning directly included from the start by the content creator, by simply attaching ontosense tags to content parts:
+
+{
+
+The height of this {table}#https://en.wikipedia.org/wiki/Table_(furniture) is
+
+{
+
+45#https://en.wikipedia.org/wiki/Value_(mathematics)
+
+{
+
+cm#https://en.wikipedia.org/wiki/Centimetre
+
+}#https://en.wikipedia.org/wiki/Units_of_measurement
+
+}#https://en.wikipedia.org/wiki/Height 
+
+making it
+
+{
+
+ideal for keeping
+
+{
+
+in front of your couch#https://en.wikipedia.org/wiki/Couch
+
+}#https://en.wikipedia.org/wiki/Position 
+
+}#https://en.wiktionary.org/wiki/beneficial.
+
+It has a round#https://en.wikipedia.org/wiki/Shape shape with a diameter of 
+
+{
+
+50#https://en.wikipedia.org/wiki/Value_(mathematics)
+
+{
+
+cm#https://en.wikipedia.org/wiki/Centimetre
+
+}#https://en.wikipedia.org/wiki/Units_of_measurement
+
+}#https://en.wikipedia.org/wiki/Diameter
+
+}#https://en.wikipedia.org/wiki/Table_(furniture)#https://www.ikea.com/us/en/cat/tables-desks-fu004/
+
+
+Hello future SEMANTIC SERVICE PROVIDERS!
+Implement ontosense content annotation tools to help content providers ontosense-tag their content.
+
+Leverage the Ontosense Search Experience inside your own content annotation tool that you can provide to content creators!
+
+enable users to specify their context to find the right ontosense tags!
+
+Implement semantic indexing based on ontosense tags.
+
+Implement ontosense knowledge networks and maintain your ontosense knowledge networks based on the coefficients/ranks defined in the Ontosense Whitepaper.
+
+Hello CONTENT PROVIDERS!
+Integrate the Ontosense Search Experience into your existing UI
+
+Choose a semantic service provider to index your content and to answer the calls from your Ontosense Search Experience UI
+
+Details regarding the Ontosense Query UI and sample usage scenarios are included in the Ontosense Whitepaper.
+
+Hello CONTENT CONSUMERS!
+Enjoy the Ontosense Search Experience UI to find things more accurately !
+
+Details regarding the Ontosense Query UI and sample usage scenarios are included in the Ontosense Whitepaper.
+
+Interested in the details? Read the Ontosense Whitepaper .
+
+
+Interested to implement?
+
+If you develop a solution based on Ontosense please include a reference to the url https://www.ontosense.com and notify me via email.
+
+If you develop the proposed Ontosense UI, please make the reference to https://www.ontosense.com directly visible in the UI and notify me via email. Thank you!
+
+
+Contact:
+
+Linkedin is the preferred communication method. All the contact details are in my Curriculum Vitae. 
+
 

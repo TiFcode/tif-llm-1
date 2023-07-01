@@ -1,55 +1,8 @@
-Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.weight', 'cls.predictions.decoder.weight', 'cls.predictions.bias', 'cls.seq_relationship.bias']
-- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
-- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.weight', 'cls.predictions.decoder.weight', 'cls.predictions.bias', 'cls.seq_relationship.bias']
-- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
-- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.weight', 'cls.predictions.decoder.weight', 'cls.predictions.bias', 'cls.seq_relationship.bias']
-- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
-- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.weight', 'cls.predictions.decoder.weight', 'cls.predictions.bias', 'cls.seq_relationship.bias']
-- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
-- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.dense.bias', 'cls.seq_relationship.weight', 'cls.predictions.decoder.weight', 'cls.predictions.bias', 'cls.seq_relationship.bias']
-- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
-- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
-get_bert_embeddings() received sentence as input: [This is a sample sentence for BERT.]
-Last hidden state shape: torch.Size([1, 10, 768])
-Pooler output shape: torch.Size([1, 768])
+[Question:]  How does Ontosense leverage websites?
+[Answers:]
+7.65: loosely - coupled semantic referencing using common website urls as semantic reference targets
+4.12: ontosense semantic references target commonly known, trusted urls
+4.78: relating the content to concepts represented using widely known, common website urls
+10.30: inside your own content annotation tool
 
-
-
-Sentence1 == Today the weather will be fine.
-Sentence2 == Today the weather will be nice.
-Sentence3 == I am hungry.
-
-
-
-get_sentence_similarity() received these sentences as input:
-[Today the weather will be fine.]
-[Today the weather will be nice.]
-get_bert_embeddings() received sentence as input: [Today the weather will be fine.]
-get_bert_embeddings() received sentence as input: [Today the weather will be nice.]
-Similarity between sentence 1 and 2: 0.9974629878997803
-
-
-
-get_sentence_similarity() received these sentences as input:
-[Today the weather will be fine.]
-[I am hungry.]
-get_bert_embeddings() received sentence as input: [Today the weather will be fine.]
-get_bert_embeddings() received sentence as input: [I am hungry.]
-Similarity between sentence 1 and 3: 0.9811462759971619
-
-
-
-
-
-
-get_bert_answer() received this Question and this Context as input:
-Question: [How does Ontosense leverage websites?]
-Context: [ ontosense a semantic technology that makes it easy to add semantic meaning to search queries and content  Ontosense introduces loosely-coupled semantic referencing using common website URLs as semantic reference targets.  It is proposed as a replacement of tightly-coupled semantic referencing of controlled vocabularies/definitions repositories.  Figure 1. The ontosense query UI allows searching based on attributes (ex: "NCQ" above) that are not defined/inexistent in the target search database. These attributes can be either selected from URL suggestions or typed manually, and finally joined into the ontosense search structure by an internal or 3rd party ontosense semantic service provider.  :: Ontosense provides benefits to the content consumers by increasing the quality of semantic interpretation of content through collaboration between the content creators and search engines (private/internal and public search engines).  ]
-
-
-
-Answer: using common website urls as semantic reference targets
+[Best answer:]  ('inside your own content annotation tool', 10.30168342590332)

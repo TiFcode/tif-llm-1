@@ -1,50 +1,69 @@
 from scipy.spatial.distance import cosine
-from transformers import BertModel, BertTokenizer, BertForQuestionAnswering
+from transformers import AutoTokenizer, AutoModelForQuestionAnswering, AutoModel
 import torch
-
-
-
 
 def get_bert_answer(question, context):
 
-    print("\n\n")
-    print("get_bert_answer() received this Question and this Context as input:")
-    print("Question: [" + question + "]")
-    print("Context: [" + context + "]")
-    print("\n\n")
+    # print()
+    # print("get_bert_answer() received Question and Context as input.")
+    # print("Question: [" + question + "]")
+    #print("Context: [" + context + "]")
+
+    model_name = 'bert-large-uncased-whole-word-masking-finetuned-squad'
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForQuestionAnswering.from_pretrained(model_name)
+
+    inputs = tokenizer(question, context, return_tensors='pt', max_length=512, truncation=True)
+    input_ids = inputs['input_ids'].tolist()[0]
+
+    text_tokens = tokenizer.convert_ids_to_tokens(input_ids)
+    #print("\n\n[Test tokens:]", text_tokens, "\n\n")
+    outputs = model(**inputs)
+
+    answer_start_scores, answer_end_scores = outputs.start_logits, outputs.end_logits
+
+    answer_start = torch.argmax(answer_start_scores)  # Get the most likely beginning of answer with the argmax of the score
+    answer_end = torch.argmax(answer_end_scores) + 1  # Get the most likely end of answer with the argmax of the score
+
+    answer = tokenizer.convert_tokens_to_string(tokenizer.convert_ids_to_tokens(input_ids[answer_start:answer_end]))
+    score = answer_start_scores[0, answer_start].item() + answer_end_scores[0, answer_end-1].item()
+
+    # print("[Answer:]", answer)
+    # print("[Score:]", score)
+
+    return answer, score
 
 
-    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-    model = BertForQuestionAnswering.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+def chunk_text(text, max_length):
+    tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
+    words = text.split()
+    chunks = []
+    current_chunk = []
+    current_length = 0
 
+    for word in words:
+        tokens = tokenizer.tokenize(word)
+        current_length += len(tokens)
+        if current_length <= max_length - 2: # Reserve space for [CLS] and [SEP]
+            current_chunk.append(word)
+        else:
+            chunks.append(" ".join(current_chunk))
+            current_chunk = [word]
+            current_length = len(tokens)
 
-    # Encode the question and context to get input IDs and attention mask
-    inputs = tokenizer(question, context, return_tensors='pt')
-    input_ids = inputs['input_ids']
-    attention_mask = inputs['attention_mask']
+    if current_chunk: # Append any remaining words as a chunk
+        chunks.append(" ".join(current_chunk))
 
-    # Get the model's predictions
-    outputs = model(input_ids, attention_mask=attention_mask)
-
-    # The model returns the predicted start and end indices of the answer
-    start_index = torch.argmax(outputs.start_logits)
-    end_index = torch.argmax(outputs.end_logits)
-
-    # Use the tokenizer to convert the indices to tokens
-    tokens = tokenizer.convert_ids_to_tokens(input_ids[0][start_index:end_index+1])
-
-    # Convert tokens to string
-    answer = tokenizer.convert_tokens_to_string(tokens)
-
-    return answer
+    return chunks
 
 
 def get_bert_embeddings(sentence):
 
     print("get_bert_embeddings() received sentence as input: [" + sentence + "]")
 
-    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-    model = BertModel.from_pretrained('bert-base-uncased')
+    model_name = 'bert-base-uncased'
+    tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
+    model = AutoModel.from_pretrained('bert-base-uncased')
 
     inputs = tokenizer(sentence, return_tensors='pt')
     # print("inputs:")
@@ -81,39 +100,54 @@ def get_sentence_similarity(sentence1, sentence2):
     return similarity
 
 if __name__ == "__main__":
-    sentence = "This is a sample sentence for BERT."
-    last_hidden_state, pooler_output = get_bert_embeddings(sentence)
-    # print("last_hidden_state:")
-    # print(last_hidden_state)
-    # print("pooler_output:")
-    # print(pooler_output)
-    print("Last hidden state shape:", last_hidden_state.shape)
-    print("Pooler output shape:", pooler_output.shape)
+    # sentence = "This is a sample sentence for BERT."
+    # last_hidden_state, pooler_output = get_bert_embeddings(sentence)
+    # # print("last_hidden_state:")
+    # # print(last_hidden_state)
+    # # print("pooler_output:")
+    # # print(pooler_output)
+    # print("Last hidden state shape:", last_hidden_state.shape)
+    # print("Pooler output shape:", pooler_output.shape)
 
-    sentence1 = "Today the weather will be fine."
-    sentence2 = "Today the weather will be nice."
-    sentence3 = "I am hungry."
+    # sentence1 = "Today the weather will be fine."
+    # sentence2 = "Today the weather will be nice."
+    # sentence3 = "I am hungry."
 
-    print("\n\n")
-    print("Sentence1 == " + sentence1)
-    print("Sentence2 == " + sentence2)
-    print("Sentence3 == " + sentence3)
-    print("\n\n")
+    # print("\n\n")
+    # print("Sentence1 == " + sentence1)
+    # print("Sentence2 == " + sentence2)
+    # print("Sentence3 == " + sentence3)
+    # print("\n\n")
 
-    print("Similarity between sentence 1 and 2:", get_sentence_similarity(sentence1, sentence2))
-    print("\n\n")
-    print("Similarity between sentence 1 and 3:", get_sentence_similarity(sentence1, sentence3))
-    print("\n\n")
-
+    # print("Similarity between sentence 1 and 2:", get_sentence_similarity(sentence1, sentence2))
+    # print("\n\n")
+    # print("Similarity between sentence 1 and 3:", get_sentence_similarity(sentence1, sentence3))
+    # print("\n\n")
 
     #question = "Who won the world series in 2020?"
     question = "How does Ontosense leverage websites?"
+    print("[Question:] ", question)
 
     #context = "The 2020 World Series was won by the Los Angeles Dodgers."
     # Read the context from a text file
     with open('context.txt', 'r') as file:
         context = file.read().replace('\n', ' ')
 
-    answer = get_bert_answer(question, context)
+    # Chunk size (in number of words)
+    chunk_size = 384
 
-    print("Answer:", answer)
+    # Split context into chunks
+    chunks = chunk_text(context, 500) # 510 is the max length that BERT can handle minus 2 for [CLS] and [SEP]
+
+    # Use BERT to answer question for each chunk
+    answers = [get_bert_answer(question, chunk) for chunk in chunks]
+
+    # Rank answers by score and select best one
+    best_answer = max(answers, key=lambda x: x[1])
+
+    print("[Answers:]")
+    #print(answers)
+    print('\n'.join([f"{score:.2f}: {answer}" for answer, score in answers]))
+
+    print()
+    print("[Best answer:] ", best_answer)
