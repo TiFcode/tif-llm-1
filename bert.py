@@ -2,6 +2,9 @@ from scipy.spatial.distance import cosine
 from transformers import AutoTokenizer, AutoModelForQuestionAnswering, AutoModel
 import torch
 
+model_name = 'bert-large-uncased-whole-word-masking-finetuned-squad'
+chunk_max_length = 500 # 510 is the max length that BERT can handle minus 2 for [CLS] and [SEP]
+
 def get_bert_answer(question, context):
 
     # print()
@@ -9,7 +12,6 @@ def get_bert_answer(question, context):
     # print("Question: [" + question + "]")
     #print("Context: [" + context + "]")
 
-    model_name = 'bert-large-uncased-whole-word-masking-finetuned-squad'
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     model = AutoModelForQuestionAnswering.from_pretrained(model_name)
 
@@ -31,13 +33,13 @@ def get_bert_answer(question, context):
     # print("[Answer:]", answer)
     # print("[Score:]", score)
 
-    print(f"\n{score:.2f}: {answer}")
+    # print(f"\n{score:.2f}: {answer}")
 
     return answer, score
 
 
 def chunk_text(text, max_length):
-    print("[START] Creating chunks")
+    #print("[START] Creating chunks")
     tokenizer = AutoTokenizer.from_pretrained('bert-base-uncased')
     words = text.split()
     chunks = []
@@ -57,8 +59,8 @@ def chunk_text(text, max_length):
     if current_chunk: # Append any remaining words as a chunk
         chunks.append(" ".join(current_chunk))
 
-    print(f"Splitted the context.txt into {chunks.count} chunks.")
-    print("[END] Creating chunks")
+    print(f"INFO: Splitted the context.txt into {len(chunks)} chunks, each having {chunk_max_length} tokens max.")
+    #print("[END] Creating chunks")
 
     return chunks
 
@@ -132,28 +134,45 @@ if __name__ == "__main__":
 
     #question = "Who won the world series in 2020?"
     question = "I am a content creator. How can I create semantic annotations for Ontosense?"
-    print("[Question:] ", question)
+    print("[Question]")
+    print(question)
+    print("\n[Processing]")
 
     #context = "The 2020 World Series was won by the Los Angeles Dodgers."
     # Read the context from a text file
     with open('context.txt', 'r') as file:
         context = file.read().replace('\n', ' ')
 
-    # Chunk size (in number of words)
-    chunk_size = 384
-
     # Split context into chunks
-    chunks = chunk_text(context, 500) # 510 is the max length that BERT can handle minus 2 for [CLS] and [SEP]
+    chunks = chunk_text(context, chunk_max_length) 
 
     # Use BERT to answer question for each chunk
+    print(f"INFO: Using model [{model_name}].")
     answers = [get_bert_answer(question, chunk) for chunk in chunks]
 
     # Rank answers by score and select best one
     best_answer = max(answers, key=lambda x: x[1])
 
-    print("[Answers:]")
-    #print(answers)
-    print('\n'.join([f"{score:.2f}: {answer}" for answer, score in answers]))
+    # Sort answers by score in descending order
+    answers = sorted(answers, key=lambda x: x[1], reverse=True)
 
-    print()
-    print("[Best answer:] ", best_answer)
+
+    # Determine the maximum score
+    max_score = max(score for _, score in answers)
+
+    # Generate histogram
+    histogram = ""
+    for answer, score in answers:
+        normalized_score = score / max_score
+        bar_length = int(normalized_score * 20)  # Scale the score to fit a bar length of 20
+        histogram += f"{score:.2f}: {answer}\n"
+        histogram += f"{'*' * bar_length}\n"
+
+    # Print the histogram
+    print("\n[Answers]")
+    print(histogram)
+
+    # Format and print the best answer
+    best_answer, best_score = best_answer
+    print("[Best answer]")
+    print(f"{best_score:.2f}: {best_answer}")

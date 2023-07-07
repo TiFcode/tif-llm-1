@@ -1,8 +1,19 @@
-[Question:]  I am a content creator. How can I create semantic annotations for Ontosense?
-[Answers:]
-9.55: referencing vocabularies / taxonomies / ontologies
-10.25: by making one or more references to previously known concepts
-9.70: attaching ontosense tags to content parts
-5.77: leverage the ontosense search experience inside your own content annotation tool that you can provide to content creators! enable users to specify their context to find the right ontosense tags! implement semantic indexing based on ontosense tags
+[Question]
+I am a content creator. How can I create semantic annotations for Ontosense?
 
-[Best answer:]  ('by making one or more references to previously known concepts', 10.25155782699585)
+[Processing]
+INFO: Splitted the context.txt into 4 chunks, each having 500 tokens max.
+INFO: Using model [bert-large-uncased-whole-word-masking-finetuned-squad].
+
+[Answers]
+10.25: by making one or more references to previously known concepts
+********************
+9.70: attaching ontosense tags to content parts
+******************
+9.55: referencing vocabularies / taxonomies / ontologies
+******************
+5.77: leverage the ontosense search experience inside your own content annotation tool that you can provide to content creators! enable users to specify their context to find the right ontosense tags! implement semantic indexing based on ontosense tags
+***********
+
+[Best answer]
+10.25: by making one or more references to previously known concepts
