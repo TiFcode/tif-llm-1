@@ -1,4 +1,4 @@
 gensim==4.0.1
 python-Levenshtein
-transformers==4.36.0
-torch==2.6.0
+transformers==5.0.0rc3
+torch==2.8.0
